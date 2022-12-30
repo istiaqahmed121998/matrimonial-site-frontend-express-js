@@ -5,16 +5,10 @@ const Contact = sequelize.define(
   "contacts",
 
   {
-    id: {
-      type: DataTypes.BIGINT,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    
     office_address: { type: DataTypes.TEXT },
-    phonenumber: { type: DataTypes.TEXT },
+    phonenumber: { type: DataTypes.TEXT, primaryKey: true },
     email_address: { type: DataTypes.TEXT },
-    iframe: { type: DataTypes.TEXT }
+    iframe: { type: DataTypes.TEXT },
   },
   { timestamps: false }
 );

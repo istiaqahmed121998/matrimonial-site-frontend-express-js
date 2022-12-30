@@ -1,16 +1,20 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
-console.log(process.env.DB_NAME,process.env.DB_USER,process.env.DB_PASSWORD,process.env.DB_HOST)
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
+  process.env.NODE_ENV === "development" ? "matrimonial" : process.env.DB_NAME,
+  process.env.NODE_ENV === "development" ? "istiaqahmed" : process.env.DB_USER,
+  process.env.NODE_ENV === "development" ? "" : process.env.DB_PASSWORD,
   {
-    host: process.env.DB_HOST,
-    dialect: 'postgres',
+    host:
+      process.env.NODE_ENV === "development"
+        ? "localhost"
+        : process.env.DB_HOST,
+    dialect: "postgres",
     dialectOptions: {
-      ssl: true
+      ssl: process.env.NODE_ENV === "production",
     },
+    logging: process.env.NODE_ENV === "development",
+
     retry: {
       match: [/Deadlock/i],
       max: 3, // Maximum rety 3 times
@@ -22,8 +26,7 @@ const sequelize = new Sequelize(
     define: {
       freezeTableName: true,
     },
-  },
-  
+  }
 );
 
 sequelize

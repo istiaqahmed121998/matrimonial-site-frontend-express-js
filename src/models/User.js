@@ -18,24 +18,24 @@ const User = sequelize.define(
     email: {
       type: DataTypes.STRING,
       isEmail: true,
+      allowNull: false,
       indexes: [{ unique: true, fields: ["email"] }],
     },
 
-    number: { type: DataTypes.STRING, unique: true },
-    dateofbirth: { type: DataTypes.DATEONLY },
+    number: { type: DataTypes.STRING, unique: true, allowNull: false },
+    dateofbirth: { type: DataTypes.DATEONLY, allowNull: false },
     hash: { type: DataTypes.STRING, allowNull: false },
     salt: { type: DataTypes.STRING, allowNull: false },
     onbehalf: { type: DataTypes.STRING },
     lookingfor: {
-      type: DataTypes.ENUM({
-        values: ["Groom", "Bride"],
-      }),
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
     defaultScope: {
       attributes: {
-        exclude: ["hash","salt"],
+        exclude: ["hash", "salt"],
       },
     },
   }

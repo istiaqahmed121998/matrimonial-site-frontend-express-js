@@ -8,11 +8,10 @@ const Membership = sequelize.define("membership", {
     autoIncrement: true,
     primaryKey: true,
   },
-  membershiptype: { type: DataTypes.STRING, allowNull: false },
+  membershiptype: { type: DataTypes.STRING, allowNull: false, unique: true },
   price: { type: DataTypes.DECIMAL, allowNull: false },
   validity: { type: DataTypes.STRING, allowNull: false },
-  validation: { type: DataTypes.DATEONLY },
-  accesslimit:{type: DataTypes.DECIMAL}
+  accesslimit: { type: DataTypes.DECIMAL },
 });
 
 module.exports = Membership;
